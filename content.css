@@ -1,0 +1,109 @@
+/* LinkSnip – injected styles */
+
+#linksnip-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  cursor: crosshair;
+  background: rgba(10, 12, 30, 0.35);
+  backdrop-filter: blur(1px);
+  animation: linksnip-fadein 0.15s ease;
+}
+
+@keyframes linksnip-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#linksnip-instructions {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  padding: 8px 18px;
+  border-radius: 100px;
+  pointer-events: none;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+#linksnip-selection {
+  display: none;
+  position: fixed;
+  border: 2px solid #4fc3f7;
+  background: rgba(79, 195, 247, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(79, 195, 247, 0.3),
+    inset 0 0 40px rgba(79, 195, 247, 0.05);
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 2147483647;
+}
+
+/* Corner handles */
+#linksnip-selection::before,
+#linksnip-selection::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: #4fc3f7;
+  border-style: solid;
+}
+#linksnip-selection::before {
+  top: -2px;
+  left: -2px;
+  border-width: 2px 0 0 2px;
+}
+#linksnip-selection::after {
+  bottom: -2px;
+  right: -2px;
+  border-width: 0 2px 2px 0;
+}
+
+/* Toast */
+#linksnip-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483647;
+  background: #0d1b2a;
+  color: #e8f4fd;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  padding: 12px 22px;
+  border-radius: 100px;
+  border: 1px solid rgba(79, 195, 247, 0.35);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(79,195,247,0.1);
+  white-space: nowrap;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#linksnip-toast.linksnip-toast-empty {
+  border-color: rgba(255, 180, 80, 0.4);
+  color: #ffd180;
+}
+
+#linksnip-toast strong {
+  color: #4fc3f7;
+}
+
+.linksnip-toast-icon {
+  font-size: 16px;
+}
+
+#linksnip-toast.linksnip-toast-fade {
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+}

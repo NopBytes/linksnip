@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkSnip</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #07101a;
+      --surface:   #0e1f2f;
+      --border:    rgba(79, 195, 247, 0.2);
+      --accent:    #4fc3f7;
+      --accent2:   #00e5cc;
+      --text:      #cce8f8;
+      --muted:     #5a7a8f;
+      --danger:    #ff6b6b;
+    }
+
+    body {
+      width: 280px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #0a1826 0%, #0d2133 100%);
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(79, 195, 247, 0.3);
+    }
+
+    .header-text h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .header-text p {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-top: 1px;
+    }
+
+    /* Main area */
+    .body {
+      padding: 18px 20px;
+    }
+
+    /* Snip button */
+    #snip-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color: #07101a;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+      box-shadow: 0 4px 20px rgba(79, 195, 247, 0.35);
+    }
+
+    #snip-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(79, 195, 247, 0.5);
+    }
+
+    #snip-btn:active {
+      transform: translateY(0);
+      opacity: 0.85;
+    }
+
+    #snip-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Status message */
+    #status {
+      margin-top: 12px;
+      font-size: 11.5px;
+      color: var(--muted);
+      text-align: center;
+      min-height: 18px;
+      transition: color 0.2s;
+      line-height: 1.4;
+    }
+
+    #status.success { color: var(--accent2); }
+    #status.error   { color: var(--danger); }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 14px 0;
+    }
+
+    /* Tips */
+    .tips {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .tip-icon {
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    kbd {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0px 5px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: var(--accent);
+      vertical-align: middle;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 10px 20px 14px;
+      text-align: center;
+      font-size: 10px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">✂️</div>
+    <div class="header-text">
+      <h1>LINKSNIP</h1>
+      <p>HYPERLINK CAPTURE TOOL</p>
+    </div>
+  </div>
+
+  <div class="body">
+    <button id="snip-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+        <path d="M4 22h16"/>
+        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+      </svg>
+      START SNIPPING
+    </button>
+
+    <div id="status">Click above, then drag to select an area</div>
+
+    <div class="divider"></div>
+
+    <div class="tips">
+      <div class="tip">
+        <span class="tip-icon">🎯</span>
+        <span>Drag over any region — all hyperlinks inside are opened in background tabs</span>
+      </div>
+      <div class="tip">
+        <span class="tip-icon">⌨️</span>
+        <span>Press <kbd>Esc</kbd> at any time to cancel the selection</span>
+      </div>
+      <div class="tip">
+        <span class="tip-icon">⚡</span>
+        <span>Works on any webpage — partial link overlaps are included</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">max 50 tabs per snip &nbsp;·&nbsp; linksnip v1.0</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
