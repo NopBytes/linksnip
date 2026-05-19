@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "LinkSnip",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Snip any area on the page and open all hyperlinks found within it in new tabs.",
   "permissions": [
     "activeTab",
